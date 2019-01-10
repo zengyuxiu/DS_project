@@ -12,42 +12,29 @@
 #
 =============================================================================*/
 #include<stdio.h>
-#include <vector>
-#include<limits>
+#include<iostream>
 #include"SqList.h"
-using namespace std;
-void Merge(vector<int> &Array, int front, int mid, int end) {
-    // preconditions:
-    // Array[front...mid] is sorted
-    // Array[mid+1 ... end] is sorted
-    // Copy Array[front ... mid] to LeftSubArray
-    // Copy Array[mid+1 ... end] to RightSubArray
-    vector<int> LeftSubArray(Array.begin() + front, Array.begin() + mid + 1);
-    vector<int> RightSubArray(Array.begin() + mid + 1, Array.begin() + end + 1);
-    int idxLeft = 0, idxRight = 0;
-    LeftSubArray.insert(LeftSubArray.end(), numeric_limits<int>::max());
-    RightSubArray.insert(RightSubArray.end(), numeric_limits<int>::max());
-    // Pick min of LeftSubArray[idxLeft] and RightSubArray[idxRight], and put into Array[i]
-    for (int i = front; i <= end; i++) {
-        if (LeftSubArray[idxLeft] < RightSubArray[idxRight]) {
-            Array[i] = LeftSubArray[idxLeft];
-            idxLeft++;
-        } else {
-            Array[i] = RightSubArray[idxRight];
-            idxRight++;
-        }
-    }
+void merge_sort_recursive(int arr[], int reg[], int start, int end) {
+    if (start >= end)
+        return;
+    int len = end - start, mid = (len >> 1) + start;
+    int start1 = start, end1 = mid;
+    int start2 = mid + 1, end2 = end;
+    merge_sort_recursive(arr, reg, start1, end1);
+    merge_sort_recursive(arr, reg, start2, end2);
+    int k = start;
+    while (start1 <= end1 && start2 <= end2)
+        reg[k++] = arr[start1] < arr[start2] ? arr[start1++] : arr[start2++];
+    while (start1 <= end1)
+        reg[k++] = arr[start1++];
+    while (start2 <= end2)
+        reg[k++] = arr[start2++];
+    for (k = start; k <= end; k++)
+        arr[k] = reg[k];
 }
 
-void _MergeSort(vector<int> &Array, int front, int end) {
-    if (front >= end)
-        return;
-    int mid = (front + end) / 2;
-    _MergeSort(Array, front, mid);
-    _MergeSort(Array, mid + 1, end);
-    Merge(Array, front, mid, end);
-}
-void MergeSort(RcdType r[],int length){
-    vector<int> Array(r,r+length);
-    _MergeSort(Array,1,length);
+void merge_sort(int arr[], const int len) {
+    std::cout<< "Running in "<<__PRETTY_FUNCTION__<<":\t";
+    int reg[len+1];
+    merge_sort_recursive(arr, reg, 1, len );
 }

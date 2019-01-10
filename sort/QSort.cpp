@@ -12,28 +12,30 @@
 #
 =============================================================================*/
 #include<stdio.h>
+#include<iostream>
 #include"SqList.h"
-int Partition(SqList &L,int low,int high){
-    L.r[0] = L.r[low];
-    auto pivo = L.r[low];
+int Partition(RcdType r[],int low,int high){
+    r[0] = r[low];
+    auto pivo = r[low];
     while(low < high){
-        while(low<high&&L.r[high]>=pivo)
+        while(low<high&&r[high]>=pivo)
             --high;
-        L.r[low] = L.r[high];
-        while(low<high&&L.r[low]<=pivo)
+        r[low] = r[high];
+        while(low<high&&r[low]<=pivo)
             ++low;
-        L.r[high] = L.r[low];
+        r[high] = r[low];
     }
-    L.r[low] = L.r[0];
+    r[low] = r[0];
     return low;
 }
-void QSort(SqList &L,int low,int high){
+void QSort(RcdType r[],int low,int high){
     if(low < high){
-        auto pivo = Partition(L,low,high);
-        QSort(L,low,pivo);
-        QSort(L,pivo+1,high);
+        auto pivo = Partition(r,low,high);
+        QSort(r,low,pivo);
+        QSort(r,pivo+1,high);
     }
 }
-void QSort(SqList &L){
-    QSort(L,1,L.length);
+void QSort(RcdType r[],int length){
+    std::cout<< "Running in "<<__PRETTY_FUNCTION__<<":\t";
+    QSort(r,1,length);
 }

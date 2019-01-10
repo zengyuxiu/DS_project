@@ -1,3 +1,18 @@
+/*=============================================================================
+#
+# Author:Yuxiu Zeng
+#
+# Copyright (C) 2019 All rights reserved.
+#
+# Last modified: 2019-01-09 17:10
+#
+# Filename: radix_sort.cpp
+#
+# Description: 
+#
+=============================================================================*/
+#include<iostream>
+#include<stdio.h>
 int maxbit(int data[], int n) 
 {
     int maxData = data[0];		
@@ -19,6 +34,9 @@ int maxbit(int data[], int n)
 }
 void radixsort(int data[], int n) 
 {
+    //data[0] is empty
+    std::cout<< "Running in "<<__PRETTY_FUNCTION__<<":\t";
+    data++;
     int d = maxbit(data, n);
     int *tmp = new int[n];
     int *count = new int[10]; 

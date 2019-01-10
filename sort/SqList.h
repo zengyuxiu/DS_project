@@ -14,7 +14,7 @@
 #include<stdio.h>
 #ifndef SQLIST
 #define SQLIST
-#define MAXSIZE 20480
+#define MAXSIZE 20001
 typedef int RcdType;
 typedef struct{
     RcdType                     r[MAXSIZE];

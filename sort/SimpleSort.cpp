@@ -13,43 +13,47 @@
 =============================================================================*/
 #include<stdio.h>
 #include<vector>
+#include<iostream>
 #include"SqList.h"
-void InsertSort(SqList &L){
-    for(int i = 2;i<=L.length;++i){
-        if(L.r[i]<L.r[i-1]){
-            L.r[0] = L.r[i];
-            L.r[i] = L.r[i-1];
-            int j = 0;
-            for(int j=i-2;L.r[0]<L.r[j];--j)
-                L.r[j+1] = L.r[j];
-            L.r[j+1] = L.r[0];
+void InsertSort(RcdType r[],int length){
+    std::cout<< "Running in "<<__PRETTY_FUNCTION__<<":";
+    for(int i = 2;i<=length;++i){
+        if(r[i]<r[i-1]){
+            r[0] = r[i];
+            r[i] = r[i-1];
+            int j=i-2;
+            for(;r[0]<r[j];--j)
+                r[j+1] = r[j];
+            r[j+1] = r[0];
         }
     }
 }
-int SelectMin(SqList &L,int i){
-    auto min = L.r[i];
+int SelectMin(RcdType r[],int i,int length){
+    auto min = r[i];
     int pos = i;
-    for(int j = i+1;j<=L.length;++j)
-        if(L.r[j] < min){
+    for(int j = i+1;j<=length;++j)
+        if(r[j] < min){
             pos = j;
-            min = L.r[j];
+            min = r[j];
         }
     return pos;
 }
-void SelectSort(SqList &L){
-    for(int i = 1;i<=L.length;++i){
-        int j = SelectMin(L,i);
+void SelectSort(RcdType r[],int length){
+    std::cout<< "Running in "<<__PRETTY_FUNCTION__<<":";
+    for(int i = 1;i<=length;++i){
+        int j = SelectMin(r,i,length);
         if(i != j){
-            auto tmp = L.r[i];
-            L.r[i] = L.r[j];
-            L.r[j] = tmp;
+            auto tmp = r[i];
+            r[i] = r[j];
+            r[j] = tmp;
         }
     }
 }
 void bubble_sort(RcdType arr[], int len) {
+    std::cout<< "Running in "<<__PRETTY_FUNCTION__<<":";
 	int i, j;
-	for (i = 0; i < len - 1; i++)
-		for (j = 0; j < len - 1 - i; j++)
+	for (i = 1; i <= len ; i++)
+		for (j = 1; j <= len - i; j++)
 			if (arr[j] > arr[j + 1]){
                 auto tmp = arr[j];
                 arr[j] = arr[j+1];
