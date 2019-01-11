@@ -38,14 +38,21 @@ Status Index::CreateIndex(string Name,StoreIndex &I){
     return OK;
 }
 Status Index::CreateRecycleList(){
-    for(int i = 0 ;i<=CREDIBILITYLEVEL;i++){
-        this->goods[((i-1)%CREDIBILITYLEVEL)].back()->next = this->goods[i].front();
-        this->goods[i].front()->front= this->goods[((i-1)%CREDIBILITYLEVEL)].back();
+    this->Head = this->goods[5].front();
+    for(int i = 0 ;i<CREDIBILITYLEVEL;i++){
+        if(i){
+            this->goods[((i-1)%CREDIBILITYLEVEL)].front()->front= this->goods[i].back();
+            this->goods[i].back()->next= this->goods[((i-1)%CREDIBILITYLEVEL)].front();
+        }
+        else{
+            this->goods[5].front()->front= this->goods[0].back();
+            this->goods[0].back()->next= this->goods[5].front();
+        }
         //向后指针
         for(std::size_t j = 0 ; (j+1) < this->goods[i].size();j++)
             this->goods[i][j]->next = this->goods[i][j+1];
         //向前指针
-        for(std::size_t j = this->goods[i].size(); j > 0;j++)
+        for(std::size_t j = this->goods[i].size() -1; j > 0;j++)
             this->goods[i][j]->front = this->goods[i][j-1];
     }
     return OK;

@@ -26,14 +26,21 @@ Status GetInfo(std::ifstream &File,std::vector<std::string> &Info){
     std::getline(File,Line);
     std::string word;
     for(const auto C: Line)
-        if(C == '\t' || C == '\n'){
-            Info.push_back(word) ;
+        if(C == '\t' || C == '\n'||C == ' '){
+            if(!word.empty())
+                Info.push_back(word) ;
             word.erase();
         }
         else
             word+=C;
-    return OK;
+    if(!word.empty())
+        Info.push_back(word);
+    if(!Info.empty())
+        return OK;
+    else
+        return ERROR;
 }
+
 
 Store::Store(ifstream &filename){
     std::vector<std::string> Info;
@@ -46,6 +53,7 @@ Store::Store(ifstream &filename){
         //商品信息
         else{
             auto * good = new Good(Info);
+            good->store = this;
             this->goods.push_back(good);
         }
         Info.clear();
@@ -60,6 +68,8 @@ Status Store::AddGoods(string Line){
             word.erase();
         }
         else word += C;
+    if(!word.empty())
+        Info.push_back(word);
     auto * good = new Good(Info);
     this->goods.push_back(good);
     return OK;
@@ -80,6 +90,13 @@ Status Store::DelGoods (string good_name){
             return OK;
         }
     return ERROR;
+}
+Status Store::Output( ){
+    ofstream    out(this->filename);
+    out << this->number <<'\t'<< this->Name << '\t'<< this->credibility;
+    for(auto good:this->goods)
+        out << good->Name << '\t' << good->price<< '\t' << good->sales;
+    return OK;
 }
 #endif
 

@@ -22,7 +22,7 @@
 #include <fstream>
 #ifndef STOREINDEX
 #define STOREINDEX
-StoreIndex::StoreIndex(std::string DirName){
+void StoreIndex::bulid(std::string DirName){
     DIR *dp;
     struct dirent *dirp;
     auto * pre_newbase = new Store;
@@ -32,9 +32,12 @@ StoreIndex::StoreIndex(std::string DirName){
             if(dirp->d_type == 8){
                 this->length ++;
                 std::string filename(dirp->d_name);
-                ifstream File(filename);
+                std::string path = DirName+ '/' + filename;
+                if(filename == "." ||filename == "..")
+                    continue;
+                ifstream File(path);
                 auto * newbase = new Store(File);
-                newbase->filename = filename;
+                newbase->filename = path;
                 newbase ->number = length;
                 pre_newbase->next = newbase;
                 pre_newbase = newbase;
@@ -89,5 +92,15 @@ Status StoreIndex::Output(){
     for(auto store = this->Head;store;store = store->next)
         Out<< store->number << '\t' << store->Name << std::endl;
     return OK;
+}
+Status StoreIndex::Buy(string store_name,string good_name,int number){
+   for(auto p = this->Head->next;p;p=p->next) 
+       if(p->Name == store_name)
+           for(auto good:p->goods)
+               if(good->Name == good_name){
+                   good->sales += number;
+                    return OK;
+               }
+   return ERROR;
 }
 #endif
