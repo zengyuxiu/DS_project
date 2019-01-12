@@ -35,6 +35,7 @@ int main(){
 	if((dp = opendir(dirname.c_str())) == NULL)
 		cout << "Can't open " << dirname << endl;
 
+    //以系统时间为seed生成随机数
     time_t nowtime;
     std::default_random_engine engine(nowtime);
 	while((dirp = readdir(dp)) != NULL){
@@ -46,7 +47,7 @@ int main(){
         instance.close();
     }
 	closedir(dp);
-
+    //顺排r1
     ifstream r1("./instances/r1",ios::out);
     string      info;
     getline(r1,info);
@@ -63,7 +64,7 @@ int main(){
     for(auto key:array1){
         r1_sort << key << '\t';
     }
-
+    //倒排r2
     ifstream r2("./instances/r2",ios::out);
     info.clear();
     getline(r2,info);

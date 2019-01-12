@@ -43,6 +43,7 @@ int main(void){
 	if((dp = opendir(dirname.c_str())) == NULL)
 		cout << "Can't open " << dirname << endl;
 
+    //读取目录下所有随机数实例
 	while((dirp = readdir(dp)) != NULL){
         string filename = dirp->d_name;
         string path = dirname + '/' + filename;
@@ -72,6 +73,7 @@ int main(void){
     return 1;
 }
 int sort_clock(SqList &L){
+    //从Func组中读取函数指针
     for(auto Sort:SortFuncs){
         auto start = std::chrono::system_clock::now();
         (*Sort)(L.r,L.length);

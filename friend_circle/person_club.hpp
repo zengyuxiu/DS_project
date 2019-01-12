@@ -17,6 +17,7 @@
 typedef class person{
     public:
     int         id = 0;
+    //指示属于哪个圈子
     bool        tag[M+1] ={0};
     int         tag_numbers = 0;
     person(int i){
@@ -27,6 +28,7 @@ typedef class club {
     public:
     int         id = 0;
     int         member_number = 0;
+    //属于该圈子的人的id
     std::vector<int>    member_ids; 
     club(int i,int _member_number){
         this->id = i;

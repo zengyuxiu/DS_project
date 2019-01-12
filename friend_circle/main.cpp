@@ -27,6 +27,7 @@ int main(){
         person p(i);
         persons.push_back(p);
     }
+    //建立基础关系
     for(int i = 1;i<=club_number;++i){
         int     member_number;
         std::cin >> member_number;
@@ -40,7 +41,9 @@ int main(){
         }
         clubs.push_back(c);
     }
+    //圈子之间取并集
     make_friends(persons,clubs);
+    //统计圈子的大小
     for(auto person:persons){
         int i = 0;
         for(int r = 0;;r++){
@@ -61,6 +64,7 @@ int main(){
 }
 void make_friends(std::vector<person> &persons,std::vector<club> &clubs){
     for(auto club:clubs){
+        //用common_tag确定所有可能的域
         std::array<bool,M+1>    common_tag;
         int                     tag_numbers = 0;
         common_tag.fill(0);

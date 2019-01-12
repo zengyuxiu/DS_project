@@ -35,9 +35,12 @@ typedef class Store{
         Store(){
         };
         Store(ifstream &filename);
+        //增加商品
         Status AddGoods (string Info);
         Status AddGoods ();
+        //删去商品
         Status DelGoods (string good_name);
+        //向文件输出信息
         Status Output();
         vector<Good*>           goods;
         std::string             filename;

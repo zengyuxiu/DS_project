@@ -17,11 +17,13 @@
 #include <algorithm>
 #ifndef INDEX
 #define  INDEX
+//销量比较函数
 struct {
     bool operator()(index_good *g1,index_good * g2) const{
         return (g1->Object->sales < g2->Object->sales);
     }
 }SalesLess;
+//按信誉度创建商店目录
 Status Index::CreateIndex(string Name,StoreIndex &I){
     this->Name = Name;
     for(auto store = I.Head->next;store;store=store->next){
@@ -37,6 +39,7 @@ Status Index::CreateIndex(string Name,StoreIndex &I){
     }
     return OK;
 }
+//构建循环
 Status Index::CreateRecycleList(){
     this->Head = this->goods[5].front();
     for(int i = 0 ;i<CREDIBILITYLEVEL;i++){
@@ -44,6 +47,7 @@ Status Index::CreateRecycleList(){
             this->goods[((i-1)%CREDIBILITYLEVEL)].front()->front= this->goods[i].back();
             this->goods[i].back()->next= this->goods[((i-1)%CREDIBILITYLEVEL)].front();
         }
+        //头尾相接 
         else{
             this->goods[5].front()->front= this->goods[0].back();
             this->goods[0].back()->next= this->goods[5].front();

@@ -16,6 +16,7 @@
 #include "good_store.hpp"
 
 void    Sales_hash_index::_mkhash(StoreIndex &store_index){
+    //用STL hash函数
     std::hash<std::string>          hash;
     for(std::size_t i = 0;i<name_index.size();++i){
         Good            good = name_index[i];
@@ -26,6 +27,7 @@ void    Sales_hash_index::_mkhash(StoreIndex &store_index){
             for(auto good:index_good)
                 sales_sum += good->Object->sales;
         good.sales = sales_sum;
+        //强制类型转换缩小范围
         good.hash= (unsigned short int)hash(good.Name);
         this->HashTable[good.hash] = i;
     }

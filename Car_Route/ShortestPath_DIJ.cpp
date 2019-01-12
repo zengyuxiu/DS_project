@@ -113,6 +113,7 @@ void ShortestPath_DIJ(MGraph &G, int v0 ,ShortPathTable &D){
     }
     D(v0,G) = 0;
     D.finish[LocateVex(G,v0)] = TURE;
+    //选取当前的最短边
     for(int i = 1;i<G.vexnum;++i){
         VRType min = INFINITY; 
         for(int w = 1;w<=G.vexnum;++w)
@@ -123,6 +124,7 @@ void ShortestPath_DIJ(MGraph &G, int v0 ,ShortPathTable &D){
                 }
     D.finish[LocateVex(G,D.current_new_vex)] = TURE;
     for(int w = 1;w<=G.vexnum;++w)
+        //更新路径
         if(!D.finish[LocateVex(G,w)] && D.Add(w,G)<D(w,G)){
             int i = LocateVex(G,D.current_new_vex);
             int j = LocateVex(G,w);

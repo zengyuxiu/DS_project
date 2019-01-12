@@ -74,6 +74,7 @@ struct{
         return (e1.End_Time< e2.End_Time);
     }
 }Earier_End;
+//归还钥匙
 Status KeyBox::Return (Event &e){
     auto the_hook = this->Hook_Status;
     for(int i = 0;i<this->Hook_Number;i++,the_hook++)
@@ -84,6 +85,7 @@ Status KeyBox::Return (Event &e){
     std::cout << e.End_Time<< std::endl;
     return this->OUT();
 }
+//借出钥匙
 Status KeyBox::Rent(Event &e){
     auto the_hook = this->Hook_Status;
     for(int i = 0;i<this->Hook_Number;i++,the_hook++)

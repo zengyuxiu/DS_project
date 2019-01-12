@@ -66,6 +66,7 @@ char Operatation2Char(int op){
             break;
     }
 }
+//暴力枚举
 int main(){
     array<int,4>            number; 
     int                     op1 = 0,op2 =  0,op3 = 0;
@@ -73,6 +74,7 @@ int main(){
     for(auto &num:number)
         std::cin >> num;
     std::sort(number.begin(),number.end());
+    //三重循环操作数
     for(op1 = 1;op1<=4;op1++)
         for(op2 = 1;op2<=4;op2++)
             for(op3 = 1;op3<=4;op3++){

@@ -22,6 +22,7 @@
 #include <fstream>
 #ifndef STOREINDEX
 #define STOREINDEX
+//从目录读取相互独立的商店信息文件
 void StoreIndex::bulid(std::string DirName){
     DIR *dp;
     struct dirent *dirp;
@@ -48,6 +49,7 @@ void StoreIndex::bulid(std::string DirName){
     pre_newbase->next = NULL;
     closedir(dp);
 };
+//增加商店
 Status StoreIndex::Add(Store * new_store){
     if(!new_store)
         return ERROR;
@@ -57,6 +59,7 @@ Status StoreIndex::Add(Store * new_store){
     new_store->number = this->length;
     return OK;
 }
+//从文件增加商店
 Status StoreIndex::Add(std::string filename){
     ifstream File(filename);
     if(File.good()){
@@ -66,6 +69,7 @@ Status StoreIndex::Add(std::string filename){
     }
     else return ERROR;
 }
+//删除商店
 Status StoreIndex::Del(int del_number){
     if(del_number > this->length)
         return ERROR;
@@ -93,6 +97,7 @@ Status StoreIndex::Output(){
         Out<< store->number << '\t' << store->Name << std::endl;
     return OK;
 }
+//购买某商店的商品
 Status StoreIndex::Buy(string store_name,string good_name,int number){
    for(auto p = this->Head->next;p;p=p->next) 
        if(p->Name == store_name)

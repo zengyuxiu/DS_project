@@ -130,6 +130,7 @@ int main(){
         order.push_back(vex);
     }
     std::vector<ShortPathTable>      tables;
+    //统计所有顶点的最短路径
     for(int i = 1;i<=G.vexnum;++i){
         ShortPathTable short_path_table(G.vexnum);
         short_path_table.current_vex = i;

@@ -1,0 +1,10 @@
+   54   115  1130 Call/Call.cpp
+   25    45   446 Find/MutiFind.cpp
+   28    56   528 Find/SingleFind.cpp
+   48    89  1057 Tree/GetList.cpp
+  186   383  3982 Call/Call.h
+  219   402  4102 DataBase/Static_Node.h
+  213   482  5261 Find/Find.h
+  346   680  9103 Node/Node.h
+  335   456  5730 Tree/SpeciesTree.h
+ 1454  2708 31339 总用量

@@ -33,6 +33,7 @@ int main (){
     std::queue<Event> Time_Seq;
     std::size_t rent_key = 1;
     std::size_t return_key = 1;
+    //按时间顺序安排事件
     do{
         if(Begin_Time_List[rent_key-1].Key_number != End_Time_List[return_key-1].Key_number){
             if(Begin_Time_List[rent_key-1].Begin_Time < End_Time_List[return_key-1].End_Time){
